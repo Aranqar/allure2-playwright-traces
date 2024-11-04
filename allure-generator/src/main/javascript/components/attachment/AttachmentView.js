@@ -33,7 +33,20 @@ class AttachmentView extends View {
             return this.loadContent();
           }
         })
-        .then(this.render);
+        .then(() => this.render());
+      return; 
+    }
+
+    if (this.isPlaywrightTrace()) {
+      const traceRelativePath = `../data/attachments/${this.attachment.source}`;
+      const viewerUrl = `trace/index.html?trace=${encodeURIComponent(traceRelativePath)}`;
+  
+      window.open(viewerUrl, '_blank');
+  
+      if (!this.fullScreen) {
+        this.destroy();
+      }
+      return;
     }
 
     if (this.attachmentInfo.type === "custom") {
@@ -49,6 +62,14 @@ class AttachmentView extends View {
       codeBlock.addClass(`language-${this.attachment.type.split("/").pop()}`);
       highlight.highlightElement(codeBlock[0]);
     }
+  }
+
+  isPlaywrightTrace() {
+    return (
+      this.attachment.type === 'application/zip' &&
+      this.attachment.name &&
+      this.attachment.name.toLowerCase().includes('trace')
+    );
   }
 
   onDestroy() {
