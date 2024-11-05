@@ -33,19 +33,14 @@ class AttachmentView extends View {
             return this.loadContent();
           }
         })
-        .then(() => this.render());
-      return; 
-    }
-
-    if (this.isPlaywrightTrace()) {
-      const traceRelativePath = `../data/attachments/${this.attachment.source}`;
-      const viewerUrl = `trace/index.html?trace=${encodeURIComponent(traceRelativePath)}`;
-  
-      window.open(viewerUrl, '_blank');
-  
-      if (!this.fullScreen) {
-        this.destroy();
-      }
+        .then(() => {
+          if (this.isPlaywrightTrace()) {
+            const baseUrl = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, "/")}`;
+            this.traceSourceUrl = new URL(this.sourceUrl, baseUrl).href;
+            this.traceViewerUrl = `trace/index.html?trace=${encodeURIComponent(this.traceSourceUrl)}`;
+          }
+          this.render()
+        });
       return;
     }
 
@@ -66,9 +61,9 @@ class AttachmentView extends View {
 
   isPlaywrightTrace() {
     return (
-      this.attachment.type === 'application/zip' &&
+      this.attachment.type === "application/zip" &&
       this.attachment.name &&
-      this.attachment.name.toLowerCase().includes('trace')
+      this.attachment.name.toLowerCase().includes("trace")
     );
   }
 
@@ -104,6 +99,8 @@ class AttachmentView extends View {
       sourceUrl: this.sourceUrl,
       attachment: this.attachment,
       fullScreen: this.fullScreen,
+      isPlaywrightTrace: this.isPlaywrightTrace(),
+      traceViewerUrl: this.traceViewerUrl || "",
     };
   }
 }

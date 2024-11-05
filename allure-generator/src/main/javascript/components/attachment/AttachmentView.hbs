@@ -52,7 +52,16 @@
         <iframe class="{{b 'attachment__iframe' fullscreen=fullScreen}}" frameborder="0" src="{{sourceUrl}}"></iframe>
 {{else}}
     <div class="{{b 'attachment__text-container' fullscreen=fullScreen}}">
-        <span class="fa fa-download"></span>
-        <a class="link" href="{{sourceUrl}}" download="{{attachment.name}}">Click to download attachment</a>
+        {{#if isPlaywrightTrace}}
+            <span class="fa fa-external-link"></span>
+            <a class="link" href="{{traceViewerUrl}}" target="_blank">Open Playwright Trace Viewer</a>
+            &nbsp;&nbsp;
+            <span class="fa fa-download"></span>
+            <a class="link" href="{{sourceUrl}}" download="{{attachment.name}}">Click to download attachment</a>
+        {{else}}
+            <span class="fa fa-download"></span>
+            <a class="link" href="{{sourceUrl}}" download="{{attachment.name}}">Click to download attachment</a>
+        {{/if}}
     </div>
 {{/if}}
+
