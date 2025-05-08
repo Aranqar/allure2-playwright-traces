@@ -86,25 +86,25 @@ subprojects {
         dependencies {
             dependency("ch.qos.logback:logback-classic:1.3.15")
             dependency("com.beust:jcommander:1.82")
-            dependency("com.github.spotbugs:spotbugs:4.9.2")
+            dependency("com.github.spotbugs:spotbugs:4.9.3")
             dependency("com.opencsv:opencsv:5.9")
-            dependency("com.puppycrawl.tools:checkstyle:10.21.4")
+            dependency("com.puppycrawl.tools:checkstyle:10.23.0")
             dependency("com.squareup.retrofit2:converter-jackson:${comSquareupRetrofit2Version}")
             dependency("com.squareup.retrofit2:retrofit:${comSquareupRetrofit2Version}")
-            dependency("commons-beanutils:commons-beanutils:1.10.0")
+            dependency("commons-beanutils:commons-beanutils:1.10.1")
             dependency("commons-io:commons-io:2.18.0")
             dependency("javax.xml.bind:jaxb-api:2.3.1")
-            dependency("net.sourceforge.pmd:pmd-java:7.11.0")
+            dependency("net.sourceforge.pmd:pmd-java:7.12.0")
             dependency("org.allurefw:allure1-model:1.0")
             dependency("org.apache.commons:commons-collections4:4.4")
             dependency("org.apache.commons:commons-lang3:3.17.0")
             dependency("org.apache.httpcomponents:httpclient:4.5.14")
-            dependency("org.apache.tika:tika-core:2.9.2")
+            dependency("org.apache.tika:tika-core:2.9.3")
             dependency("org.assertj:assertj-core:3.27.3")
             dependency("org.eclipse.jetty:jetty-server:12.0.16")
             dependency("org.freemarker:freemarker:2.3.34")
             dependency("org.junit-pioneer:junit-pioneer:2.3.0")
-            dependency("org.mockito:mockito-core:5.15.2")
+            dependency("org.mockito:mockito-core:5.17.0")
             dependency("org.projectlombok:lombok:1.18.36")
             dependency("org.slf4j:slf4j-api:${orgSlf4jVersion}")
             dependency("org.slf4j:slf4j-nop:${orgSlf4jVersion}")
@@ -173,6 +173,7 @@ subprojects {
         ruleSets = listOf()
         ruleSetFiles = rootProject.files("gradle/quality-configs/pmd/pmd.xml")
         targetJdk = TargetJdk.VERSION_1_7
+        isConsoleOutput = true
     }
 
     spotbugs {
