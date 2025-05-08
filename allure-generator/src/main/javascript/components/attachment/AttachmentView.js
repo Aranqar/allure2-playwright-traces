@@ -61,7 +61,7 @@ class AttachmentView extends View {
 
   isPlaywrightTrace() {
     return (
-      this.attachment.type === "application/zip" &&
+      this.attachment.type === "application/vnd.allure.playwright-trace" &&
       this.attachment.name &&
       this.attachment.name.toLowerCase().includes("trace")
     );
